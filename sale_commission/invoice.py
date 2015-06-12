@@ -170,9 +170,9 @@ class account_invoice(orm.Model):
             if 'commission_ids' in line[2]:
                 duply_ids = []
                 for cm_id in line[2].get('commission_ids', []):
-                    dup_id = self.pool.get("invoice.line.agent").copy(
+                    dup_id = self.env["invoice.line.agent"].copy(
                         cm_id, {'settled': False})
-                    duply_ids.append(dup_id)
+                    duply_ids.append(dup_id.id)
                 line[2]['commission_ids'] = [(6, 0, duply_ids)]
 
         return res
